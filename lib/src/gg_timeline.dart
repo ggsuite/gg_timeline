@@ -55,8 +55,9 @@ abstract class GgTimeline<T> {
 
     // If time is before start of song, also the first item is a future item.
     // Otherwise future items are all items behind the current item
-    var index =
-        timePosition >= 0 ? _indexOfCurrentItem + 1 : _indexOfCurrentItem;
+    var index = timePosition >= 0
+        ? _indexOfCurrentItem + 1
+        : _indexOfCurrentItem;
 
     final result = <GgTimelineItem<T>>[];
 
@@ -132,7 +133,6 @@ abstract class GgTimeline<T> {
         _currentItem = snapShot;
       }
     }
-
     // Find item in past
     else {
       while (--index >= 0) {
@@ -178,17 +178,11 @@ abstract class GgTimeline<T> {
   /// Will update the data of an existing item starting on [timePosition].
   /// If such an item is not existing, a new item will be inserted into the
   /// timeline. The duration of the previous item will change subsequently.
-  void addOrReplaceItem({
-    required T data,
-    required GgSeconds timePosition,
-  }) {
+  void addOrReplaceItem({required T data, required GgSeconds timePosition}) {
     jumpToOrBefore(timePosition);
 
     // Just replace last item when possible
-    if (tryToReplaceExistingItem(
-      data: data,
-      timePosition: timePosition,
-    )) {
+    if (tryToReplaceExistingItem(data: data, timePosition: timePosition)) {
       return;
     }
 
@@ -217,12 +211,7 @@ abstract class GgTimeline<T> {
     required T data,
     required GgSeconds validFrom,
     required GgSeconds validTo,
-  }) =>
-      GgTimelineItem<T>(
-        validFrom: validFrom,
-        validTo: validTo,
-        data: data,
-      );
+  }) => GgTimelineItem<T>(validFrom: validFrom, validTo: validTo, data: data);
 
   // ######################
   // Private
@@ -240,11 +229,7 @@ abstract class GgTimeline<T> {
 
   // ...........................................................................
   void _initInitialItem() {
-    _currentItem = createItem(
-      data: seed,
-      validFrom: 0.0,
-      validTo: 0.0,
-    );
+    _currentItem = createItem(data: seed, validFrom: 0.0, validTo: 0.0);
 
     _indexOfCurrentItem = 0;
     _items.add(_currentItem);
@@ -274,10 +259,7 @@ class ExampleTimeline extends GgTimeline<double> {
 
   void _addFurtherItems(int numItems) {
     for (int i = 0; i < numItems; i++) {
-      addOrReplaceItem(
-        data: i.toDouble(),
-        timePosition: i.toDouble(),
-      );
+      addOrReplaceItem(data: i.toDouble(), timePosition: i.toDouble());
     }
   }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Add .gitattributes file
+
 ## [1.0.5] - 2024-04-13
 
 ### Removed
@@ -30,6 +36,7 @@
 
 - Initial version.
 
+[Unreleased]: https://github.com/inlavigo/gg_timeline/compare/1.0.5...HEAD
 [1.0.5]: https://github.com/inlavigo/gg_timeline/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/inlavigo/gg_timeline/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/inlavigo/gg_timeline/compare/1.0.2...1.0.3

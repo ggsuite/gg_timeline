@@ -14,17 +14,15 @@ void main() {
   late GgTimelineItem<double> lastItem;
   late GgTimelineItem<double> secondLastItem;
 
-  setUp(
-    () {
-      timeline = exampleGgTimeline();
-      timeline.jumpToBeginning();
+  setUp(() {
+    timeline = exampleGgTimeline();
+    timeline.jumpToBeginning();
 
-      firstItem = timeline.items[0];
-      secondItem = timeline.items[1];
-      lastItem = timeline.items[timeline.items.length - 1];
-      secondLastItem = timeline.items[timeline.items.length - 2];
-    },
-  );
+    firstItem = timeline.items[0];
+    secondItem = timeline.items[1];
+    lastItem = timeline.items[timeline.items.length - 1];
+    secondLastItem = timeline.items[timeline.items.length - 2];
+  });
 
   group('GgTimeline', () {
     // #########################################################################
@@ -122,26 +120,28 @@ void main() {
         expect(timeline.items.last.validFrom, validFrom);
       });
 
-      test('should insert an item if no item with same time position exists.',
-          () {
-        // Check item count before
-        final itemCountBefore = timeline.items.length;
+      test(
+        'should insert an item if no item with same time position exists.',
+        () {
+          // Check item count before
+          final itemCountBefore = timeline.items.length;
 
-        // Insert item in the middle between first and second item
-        timeline.addOrReplaceItem(data: 0.5, timePosition: 0.5);
-        expect(timeline.items.length, itemCountBefore + 1);
+          // Insert item in the middle between first and second item
+          timeline.addOrReplaceItem(data: 0.5, timePosition: 0.5);
+          expect(timeline.items.length, itemCountBefore + 1);
 
-        final addedItem = timeline.item(0.5);
-        expect(addedItem, timeline.items[1]);
+          final addedItem = timeline.item(0.5);
+          expect(addedItem, timeline.items[1]);
 
-        // Now the previous item should only endure to the inserted one
-        expect(timeline.items.first.validTo, 0.5);
-        expect(timeline.items.first.duration, 0.5);
+          // Now the previous item should only endure to the inserted one
+          expect(timeline.items.first.validTo, 0.5);
+          expect(timeline.items.first.duration, 0.5);
 
-        // The new item should last to the next one
-        expect(addedItem.validFrom, 0.5);
-        expect(addedItem.validTo, 1.0);
-      });
+          // The new item should last to the next one
+          expect(addedItem.validFrom, 0.5);
+          expect(addedItem.validTo, 1.0);
+        },
+      );
 
       test('should update previous item\'s validTo value.', () {
         // Check the last item's validTo value
@@ -166,12 +166,13 @@ void main() {
 
     // #########################################################################
     group('futureItems(timePosition, n, where)', () {
-      test(
-          'should return the n first items when timePosition is '
+      test('should return the n first items when timePosition is '
           'before beginning', () {
         const count = 2;
-        final futureItems =
-            timeline.futureItems(timePosition: -0.001, count: count);
+        final futureItems = timeline.futureItems(
+          timePosition: -0.001,
+          count: count,
+        );
 
         expect(futureItems.first, firstItem);
         expect(futureItems.length, count);
@@ -188,15 +189,16 @@ void main() {
 
       test('should return available items if count is too big', () {
         const count = 10000;
-        final futureItems =
-            timeline.futureItems(timePosition: -0.001, count: count);
+        final futureItems = timeline.futureItems(
+          timePosition: -0.001,
+          count: count,
+        );
 
         expect(futureItems.first, firstItem);
         expect(futureItems.length, timeline.items.length);
       });
 
-      test(
-          'should return available items if not enough items are available '
+      test('should return available items if not enough items are available '
           'anymore', () {
         const count = 5;
 
@@ -229,35 +231,27 @@ void main() {
     group('pastItems(timePosition, n, where)', () {
       group('should return right past items', () {
         test('when timePosition is before start of the timeline', () {
-          final pastItems = timeline.pastItems(
-            timePosition: -0.5,
-            count: 2,
-          );
+          final pastItems = timeline.pastItems(timePosition: -0.5, count: 2);
 
           expect(pastItems, <GgTimelineItem<double>>[]);
         });
 
         test('when timePosition is at the beginning of the timeline', () {
-          final pastItems = timeline.pastItems(
-            timePosition: 0,
-            count: 2,
-          );
-
-          expect(pastItems, <GgTimelineItem<double>>[]);
-        });
-
-        test('when timePosition is shortly after beginning of the timeline',
-            () {
-          final pastItems = timeline.pastItems(
-            timePosition: 0.5,
-            count: 2,
-          );
+          final pastItems = timeline.pastItems(timePosition: 0, count: 2);
 
           expect(pastItems, <GgTimelineItem<double>>[]);
         });
 
         test(
-            'when timePosition is shortly before the end of the first item on '
+          'when timePosition is shortly after beginning of the timeline',
+          () {
+            final pastItems = timeline.pastItems(timePosition: 0.5, count: 2);
+
+            expect(pastItems, <GgTimelineItem<double>>[]);
+          },
+        );
+
+        test('when timePosition is shortly before the end of the first item on '
             'the timeline', () {
           final pastItems = timeline.pastItems(
             timePosition: firstItem.validTo - 0.1,
@@ -268,18 +262,18 @@ void main() {
         });
 
         test(
-            'when timePosition is at the end of the first item on the timeline',
-            () {
-          final pastItems = timeline.pastItems(
-            timePosition: firstItem.validTo,
-            count: 2,
-          );
+          'when timePosition is at the end of the first item on the timeline',
+          () {
+            final pastItems = timeline.pastItems(
+              timePosition: firstItem.validTo,
+              count: 2,
+            );
 
-          expect(pastItems, [firstItem]);
-        });
+            expect(pastItems, [firstItem]);
+          },
+        );
 
-        test(
-            'when timePosition is shortly after the end of the first item on '
+        test('when timePosition is shortly after the end of the first item on '
             'the timeline', () {
           final pastItems = timeline.pastItems(
             timePosition: firstItem.validTo + 0.1,
@@ -307,15 +301,17 @@ void main() {
           expect(pastItems, [secondLastItem, lastItem]);
         });
 
-        test('when timePosition is far after the last item on the timeline',
-            () {
-          final pastItems = timeline.pastItems(
-            timePosition: lastItem.validTo + 1000,
-            count: 2,
-          );
+        test(
+          'when timePosition is far after the last item on the timeline',
+          () {
+            final pastItems = timeline.pastItems(
+              timePosition: lastItem.validTo + 1000,
+              count: 2,
+            );
 
-          expect(pastItems, [secondLastItem, lastItem]);
-        });
+            expect(pastItems, [secondLastItem, lastItem]);
+          },
+        );
 
         test('when filter is given', () {
           final pastItems = timeline
