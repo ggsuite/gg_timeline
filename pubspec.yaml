@@ -7,10 +7,10 @@ environment:
   sdk: ">=3.13.0 <4.0.0"
 
 dependencies:
-  gg_typedefs: ^1.1.4
+  gg_typedefs: ^1.2.0
 
 dev_dependencies:
   lints: ^6.1.0
   test: ^1.31.2
   args: ^2.7.0
-  gg_capture_print: ^1.0.10
+  gg_capture_print: ^1.1.0
