@@ -100,18 +100,16 @@ packages:
   gg_capture_print:
     dependency: "direct dev"
     description:
-      name: gg_capture_print
-      sha256: ba6a19c2d7aad636cb306e556ceddb5646ed37380d18ebe9e894586e3e42c5cf
-      url: "https://pub.dev"
-    source: hosted
+      path: "../gg_capture_print"
+      relative: true
+    source: path
     version: "1.1.0"
   gg_typedefs:
     dependency: "direct main"
     description:
-      name: gg_typedefs
-      sha256: e5f22df63a6564f84e9b2c2d60a3f8a2d578ba5a843ea5ddb997dbb54c060ad7
-      url: "https://pub.dev"
-    source: hosted
+      path: "../gg_typedefs"
+      relative: true
+    source: path
     version: "1.2.0"
   glob:
     dependency: transitive
