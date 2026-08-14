@@ -1,6 +1,6 @@
 name: gg_timeline
 description: GgTimeline allows you to manage arbitrary data like on a timeline.
-version: 1.0.6
+version: 1.1.0
 repository: https://github.com/inlavigo/gg_timeline
 
 environment:
