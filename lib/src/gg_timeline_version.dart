@@ -9,4 +9,4 @@
 // coverage:ignore-file
 
 /// The version of the `gg_timeline` package.
-const String ggTimelineVersion = '1.1.0';
+const String ggTimelineVersion = '1.2.0';
