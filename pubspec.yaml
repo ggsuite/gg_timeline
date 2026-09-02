@@ -1,16 +1,18 @@
 name: gg_timeline
 description: GgTimeline allows you to manage arbitrary data like on a timeline.
-version: 1.1.0
+version: 1.2.0
 repository: https://github.com/inlavigo/gg_timeline
 
 environment:
   sdk: ">=3.13.0 <4.0.0"
 
 dependencies:
-  gg_typedefs: ^1.2.0
+  gg_typedefs: ^1.3.0
 
 dev_dependencies:
   lints: ^6.1.0
   test: ^1.31.2
   args: ^2.7.0
-  gg_capture_print: ^1.1.0
+  gg_capture_print: ^1.2.0
+  dna_ggsuite: ^0.2.0
+  helix: ^1.3.0
