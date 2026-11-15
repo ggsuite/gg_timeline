@@ -4,15 +4,15 @@ version: 1.2.0
 repository: https://github.com/inlavigo/gg_timeline
 
 environment:
-  sdk: ">=3.13.0 <4.0.0"
+  sdk: ">=3.14.0 <4.0.0"
 
 dependencies:
   gg_typedefs: ^1.3.0
 
 dev_dependencies:
   lints: ^6.1.0
-  test: ^1.31.2
+  test: ^1.33.0
   args: ^2.7.0
-  gg_capture_print: ^1.2.0
+  gg_capture_print: ^1.2.1
   dna_ggsuite: ^2.0.0
-  helix: ^1.3.0
+  helix: ^1.15.2
