@@ -14,5 +14,5 @@ dev_dependencies:
   test: ^1.33.0
   args: ^2.7.0
   gg_capture_print: ^1.2.1
-  dna_ggsuite: ^2.0.0
+  dna_ggsuite: ^3.0.0
   helix: ^1.15.2
